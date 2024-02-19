@@ -1,0 +1,10 @@
+﻿-- to update the tools on the command line:
+dotnet tool update --global dotnet-ef
+-- implies installing the .NET runtime
+winget install Microsoft.DotNet.DesktopRuntime.8
+-- start without DTO's
+-- provide a conversion specification for value objects
+-- .NET 8 invariant culture only
+
+-- create the database using a migration
+dotnet ef migrations add DatabaseCreation
