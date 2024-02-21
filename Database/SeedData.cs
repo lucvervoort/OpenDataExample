@@ -19,17 +19,17 @@ namespace OpenDataExample.Database
 
         public async void Initialize()
         {
-            using (var context = new ApplicationDbContext(
-                _serviceProvider.GetRequiredService<DbContextOptions<ApplicationDbContext>>()))
+            using (var context = new MyApplicationDbContext(
+                _serviceProvider.GetRequiredService<DbContextOptions<MyApplicationDbContext>>()))
             {
                 // Look for any Laureates or Prizes.
-                if (context.Welcome.Any())
+                if (context.Welcomes.Any())
                 {
                     return;   // DB has been seeded
                 }
 
                 Welcome welcome = await _httpClientRepository.GetAsync<Welcome>("https://data.stad.gent/api/explore/v2.1/catalog/datasets/fietsenstallingen-gent/records?limit=20&refine=naam%3A%22Braunplein%22");
-                context.Welcome.Add(welcome);
+                context.Welcomes.Add(welcome);
                 context.SaveChanges();
 
                 /*

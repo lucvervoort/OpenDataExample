@@ -1,18 +1,21 @@
-﻿using System.Text.Json.Serialization;
+﻿using System;
+using System.Collections.Generic;
 
-namespace OpenDataExample.Models
+namespace OpenDataExample.Models;
+
+public partial class ResultGeometry
 {
-    public partial class ResultGeometry
-    {
-        public int Id { get; set; }
+    public int Id { get; set; }
 
-        [JsonPropertyName("type")]
-        public virtual string Type { get; set; }
+    public string Type { get; set; } = null!;
 
-        [JsonPropertyName("geometry")]
-        public virtual GeometryGeometry Geometry { get; set; }
+    public int GeometryId { get; set; }
 
-        [JsonPropertyName("properties")]
-        public virtual Properties Properties { get; set; }
-    }
+    public int PropertiesId { get; set; }
+
+    public virtual GeometryGeometry Geometry { get; set; } = null!;
+
+    public virtual Property Properties { get; set; } = null!;
+
+    public virtual ICollection<Result> Results { get; set; } = new List<Result>();
 }

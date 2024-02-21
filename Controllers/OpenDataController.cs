@@ -9,9 +9,9 @@ namespace OpenDataExample.Controllers
     public class OpenDataController : ControllerBase
     {
         private readonly ILogger<OpenDataController> _logger;
-        private readonly ApplicationDbContext _dbContext;
+        private readonly MyApplicationDbContext _dbContext;
 
-        public OpenDataController(ILogger<OpenDataController> logger, ApplicationDbContext dbContext)
+        public OpenDataController(ILogger<OpenDataController> logger, MyApplicationDbContext dbContext)
         {
             _logger = logger;
             _dbContext = dbContext;
@@ -21,7 +21,7 @@ namespace OpenDataExample.Controllers
         public ActionResult<IEnumerable<AddressDTO>> Get()
         {
             var addresses = new List<AddressDTO>();
-            var w = _dbContext?.Welcome?.Include(c => c.Results)?.ThenInclude(r => r.GeoPoint2D)?.FirstOrDefault();
+            var w = _dbContext?.Welcomes?.Include(c => c.Results)?.ThenInclude(r => r.GeoPoint2D)?.FirstOrDefault();
             if (w != null)
             {
                 foreach (var a in w.Results)

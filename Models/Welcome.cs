@@ -1,17 +1,13 @@
-﻿using System.Text.Json;
-using System.Text.Json.Serialization;
+﻿using System;
+using System.Collections.Generic;
 
-namespace OpenDataExample.Models
+namespace OpenDataExample.Models;
+
+public partial class Welcome
 {
-    public class Welcome
-    {
-        public int Id { get; set; }
+    public int Id { get; set; }
 
-        [JsonPropertyName("total_count")]
-        public virtual long TotalCount { get; set; }
+    public long TotalCount { get; set; }
 
-        [JsonPropertyName("results")]
-        public virtual List<Result>? Results { get; set; }
-        public static Welcome FromJson(string json) => JsonSerializer.Deserialize<Welcome>(json, QuickType.Converter.Settings);
-    }
+    public virtual ICollection<Result> Results { get; set; } = new List<Result>();
 }

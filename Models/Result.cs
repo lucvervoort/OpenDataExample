@@ -1,64 +1,53 @@
-﻿using System.Text.Json.Serialization;
+﻿using System;
+using System.Collections.Generic;
 
-namespace OpenDataExample.Models
+namespace OpenDataExample.Models;
+
+public partial class Result
 {
-    public partial class Result
-    {
-        public int Id { get; set; }
+    public int Id { get; set; }
 
-        [JsonPropertyName("straat")]
-        public virtual string Straat { get; set; }
+    public string Straat { get; set; } = null!;
 
-        [JsonPropertyName("geometry")]
-        public virtual ResultGeometry Geometry { get; set; }
+    public int GeometryId { get; set; }
 
-        [JsonPropertyName("huisnr")]
-        [JsonConverter(typeof(QuickType.ParseStringConverter))]
-        public virtual long Huisnr { get; set; }
+    public long Huisnr { get; set; }
 
-        [JsonPropertyName("karakter")]
-        public virtual string Karakter { get; set; }
+    public string Karakter { get; set; } = null!;
 
-        [JsonPropertyName("eigenaar")]
-        public virtual string Eigenaar { get; set; }
+    public string Eigenaar { get; set; } = null!;
 
-        [JsonPropertyName("capaciteit")]
-        public virtual long Capaciteit { get; set; }
+    public long Capaciteit { get; set; }
 
-        [JsonPropertyName("openbaar")]
-        public virtual string Openbaar { get; set; }
+    public string Openbaar { get; set; } = null!;
 
-        [JsonPropertyName("ondergrond")]
-        public virtual string Ondergrond { get; set; }
+    public string Ondergrond { get; set; } = null!;
 
-        [JsonPropertyName("bestemming")]
-        public virtual string Bestemming { get; set; }
+    public string Bestemming { get; set; } = null!;
 
-        [JsonPropertyName("status")]
-        public virtual string Status { get; set; }
+    public string Status { get; set; } = null!;
 
-        [JsonPropertyName("urid")]
-        public virtual string Urid { get; set; }
+    public string Urid { get; set; } = null!;
 
-        [JsonPropertyName("naam")]
-        public virtual string Naam { get; set; }
+    public string Naam { get; set; } = null!;
 
-        [JsonPropertyName("naamid")]
-        public virtual string Naamid { get; set; }
+    public string Naamid { get; set; } = null!;
 
-        [JsonPropertyName("bezettingsinfo")]
-        public virtual string Bezettingsinfo { get; set; }
+    public string Bezettingsinfo { get; set; } = null!;
 
-        [JsonPropertyName("bronid")]
-        public virtual string Bronid { get; set; }
+    public string Bronid { get; set; } = null!;
 
-        [JsonPropertyName("betrokkenadressen")]
-        public virtual string Betrokkenadressen { get; set; }
+    public string Betrokkenadressen { get; set; } = null!;
 
-        [JsonPropertyName("timestampbron")]
-        public virtual DateTimeOffset Timestampbron { get; set; }
+    public DateTimeOffset Timestampbron { get; set; }
 
-        [JsonPropertyName("geo_point_2d")]
-        public virtual GeoPoint2D GeoPoint2D { get; set; }
-    }
+    public int GeoPoint2Did { get; set; }
+
+    public int? WelcomeId { get; set; }
+
+    public virtual GeoPoint2D GeoPoint2D { get; set; } = null!;
+
+    public virtual ResultGeometry Geometry { get; set; } = null!;
+
+    public virtual Welcome? Welcome { get; set; }
 }

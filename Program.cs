@@ -3,25 +3,6 @@ using Microsoft.EntityFrameworkCore;
 
 namespace OpenDataExample
 {
-    public class HttpClientRepository
-    {
-        private IHttpClientFactory _httpClientFactory;
-
-        public HttpClientRepository(IHttpClientFactory httpClientFactory)
-        {
-            _httpClientFactory = httpClientFactory;
-        }
-
-        public async Task<T?> GetAsync<T>(string url)
-        {
-            var client = _httpClientFactory.CreateClient("HttpClient");
-            var response = await client.GetAsync(url);
-            if (!response.IsSuccessStatusCode)
-                throw new Exception($"{response.StatusCode}: {response.ReasonPhrase}");
-            var responseObject = await response.Content.ReadFromJsonAsync<T>();
-            return responseObject;
-        }
-    }
 
     public class Program
     {
@@ -35,7 +16,7 @@ namespace OpenDataExample
             builder.Services.AddSingleton<SeedData>();
 
             // voeg toe: Microsoft.EntityFrameworkCore.SqlServer
-            builder.Services.AddDbContext<ApplicationDbContext>(options =>
+            builder.Services.AddDbContext<MyApplicationDbContext>(options =>
                 options.UseSqlServer(builder.Configuration.GetConnectionString("ApplicationDbContext"))
                 , contextLifetime: ServiceLifetime.Scoped
                 , optionsLifetime: ServiceLifetime.Singleton); // default bestaan options enkel scoped en we willen ze gebruiken in SeedData

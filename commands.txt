@@ -8,3 +8,5 @@ winget install Microsoft.DotNet.DesktopRuntime.8
 
 -- create the database using a migration
 dotnet ef migrations add DatabaseCreation
+
+-- (re)scaffold
