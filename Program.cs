@@ -12,10 +12,13 @@ namespace OpenDataExample
 
             // Add services to the container.
             builder.Services.AddHttpClient("httpClient");
-            builder.Services.AddSingleton<HttpClientRepository>();
+            builder.Services.AddSingleton<HttpClientFactory>();
+            
             builder.Services.AddSingleton<SeedData>();
 
-            // voeg toe: Microsoft.EntityFrameworkCore.SqlServer
+            // voeg toe: dotnet add package
+            //      Microsoft.EntityFrameworkCore.SqlServer
+            //      Microsoft.EntityFrameworkCore.Tools
             builder.Services.AddDbContext<MyApplicationDbContext>(options =>
                 options.UseSqlServer(builder.Configuration.GetConnectionString("ApplicationDbContext"))
                 , contextLifetime: ServiceLifetime.Scoped
@@ -30,7 +33,12 @@ namespace OpenDataExample
             // We maken hier ook een service van - dan zorgt DI voor alle parameters ...
             var seedData = app.Services.GetService<SeedData>();
             seedData?.Initialize();
-
+/*
+            if(seedData != null)
+            {
+                seedData.Initialize();
+            }
+*/
             // Configure the HTTP request pipeline.
             if (app.Environment.IsDevelopment())
             {

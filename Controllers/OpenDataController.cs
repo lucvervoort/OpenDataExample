@@ -4,6 +4,10 @@ using OpenDataExample.Database;
 
 namespace OpenDataExample.Controllers
 {
+    public class XX
+    {
+        
+    }
     [ApiController]
     [Route("[controller]")]
     public class OpenDataController : ControllerBase
@@ -21,7 +25,7 @@ namespace OpenDataExample.Controllers
         public ActionResult<IEnumerable<AddressDTO>> Get()
         {
             var addresses = new List<AddressDTO>();
-            var w = _dbContext?.Welcomes?.Include(c => c.Results)?.ThenInclude(r => r.GeoPoint2D)?.FirstOrDefault();
+            var w = _dbContext?.Fietsenstallingen?.Include(c => c.Results)?.ThenInclude(r => r.GeoPoint2D)?.FirstOrDefault();
             if (w != null)
             {
                 foreach (var a in w.Results)

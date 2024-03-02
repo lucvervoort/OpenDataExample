@@ -7,13 +7,13 @@ namespace OpenDataExample.Database
     public class SeedData
     {
         private readonly ILogger _logger;
-        private readonly HttpClientRepository _httpClientRepository;
+        private readonly HttpClientFactory _httpClientFactory;
         private readonly IServiceProvider _serviceProvider;
 
-        public SeedData(ILogger<SeedData> logger, HttpClientRepository httpClientRepository, IServiceProvider serviceProvider)
+        public SeedData(ILogger<SeedData> logger, HttpClientFactory httpClientFactory, IServiceProvider serviceProvider)
         {
             _logger = logger;
-            _httpClientRepository = httpClientRepository;
+            _httpClientFactory = httpClientFactory;
             _serviceProvider = serviceProvider;
         }
 
@@ -22,35 +22,14 @@ namespace OpenDataExample.Database
             using (var context = new MyApplicationDbContext(
                 _serviceProvider.GetRequiredService<DbContextOptions<MyApplicationDbContext>>()))
             {
-                // Look for any Laureates or Prizes.
-                if (context.Welcomes.Any())
-                {
-                    return;   // DB has been seeded
-                }
+                //if (context.Welcomes.Any())
+                //{
+                //    return;   // DB has been seeded
+                //}
 
-                Welcome welcome = await _httpClientRepository.GetAsync<Welcome>("https://data.stad.gent/api/explore/v2.1/catalog/datasets/fietsenstallingen-gent/records?limit=20&refine=naam%3A%22Braunplein%22");
-                context.Welcomes.Add(welcome);
+                // Welcome welcome = await _httpClientFactory.GetAsync<Welcome>("https://data.stad.gent/api/explore/v2.1/catalog/datasets/fietsenstallingen-gent/records?limit=20&refine=naam%3A%22Braunplein%22");
+                // context.Welcomes.Add(welcome);
                 context.SaveChanges();
-
-                /*
-                //get the json file from the wwwroot folder.
-                var env = serviceProvider.GetRequiredService<IWebHostEnvironment>();
-                var path = Path.Combine(env.WebRootPath, "files", "Laureate.json");
-                //read the json content and then deserialize it to object,
-                var jsonString = System.IO.File.ReadAllText(path);
-                if (jsonString != null)
-                {
-#pragma warning disable CS8600 // Converting null literal or possible null value to non-nullable type.
-                    Prize item = System.Text.Json.JsonSerializer.Deserialize<Prize>(jsonString);
-#pragma warning restore CS8600 // Converting null literal or possible null value to non-nullable type.
-
-                    if (item != null)
-                    {
-                        context.Prizes.Add(item); //insert the data to the database.
-                        context.SaveChanges();
-                    }
-                }
-                */
             }
         }
     }

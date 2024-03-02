@@ -49,5 +49,5 @@ public partial class Result
 
     public virtual ResultGeometry Geometry { get; set; } = null!;
 
-    public virtual Welcome? Welcome { get; set; }
+    public virtual Fietsenstalling? Welcome { get; set; }
 }

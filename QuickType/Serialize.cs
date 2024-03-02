@@ -5,6 +5,6 @@ namespace OpenDataExample.QuickType
 {
     public static class Serialize
     {
-        public static string ToJson(this Welcome self) => JsonSerializer.Serialize(self, Converter.Settings);
+        public static string ToJson(this Fietsenstalling self) => JsonSerializer.Serialize(self, Converter.Settings);
     }
 }

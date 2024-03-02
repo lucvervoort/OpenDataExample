@@ -1,6 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using Microsoft.EntityFrameworkCore;
+﻿using Microsoft.EntityFrameworkCore;
 using OpenDataExample.Models;
 
 namespace OpenDataExample.Database;
@@ -16,11 +14,13 @@ public partial class ApplicationDbContext : DbContext
     {
     }
 
+    // Specialleke:
     public ApplicationDbContext(DbContextOptions options)
     : base(options)
     {
     }
 
+    /*
     public virtual DbSet<GeoPoint2D> GeoPoint2Ds { get; set; }
 
     public virtual DbSet<GeometryGeometry> GeometryGeometries { get; set; }
@@ -30,8 +30,9 @@ public partial class ApplicationDbContext : DbContext
     public virtual DbSet<Result> Results { get; set; }
 
     public virtual DbSet<ResultGeometry> ResultGeometries { get; set; }
+    */
 
-    public virtual DbSet<Welcome> Welcomes { get; set; }
+    public virtual DbSet<Fietsenstalling> Fietsenstallingen { get; set; }
 
     /*
     protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
@@ -83,7 +84,7 @@ public partial class ApplicationDbContext : DbContext
             entity.HasOne(d => d.Properties).WithMany(p => p.ResultGeometries).HasForeignKey(d => d.PropertiesId);
         });
 
-        modelBuilder.Entity<Welcome>(entity =>
+        modelBuilder.Entity<Fietsenstalling>(entity =>
         {
             entity.ToTable("Welcome");
         });

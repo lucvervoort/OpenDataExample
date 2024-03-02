@@ -3,7 +3,7 @@ using System.Collections.Generic;
 
 namespace OpenDataExample.Models;
 
-public partial class Welcome
+public partial class Fietsenstalling
 {
     public int Id { get; set; }
 

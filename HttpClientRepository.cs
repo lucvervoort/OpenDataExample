@@ -1,10 +1,10 @@
 ﻿namespace OpenDataExample
 {
-    public class HttpClientRepository
+    public class HttpClientFactory
     {
         private IHttpClientFactory _httpClientFactory;
 
-        public HttpClientRepository(IHttpClientFactory httpClientFactory)
+        public HttpClientFactory(IHttpClientFactory httpClientFactory)
         {
             _httpClientFactory = httpClientFactory;
         }
